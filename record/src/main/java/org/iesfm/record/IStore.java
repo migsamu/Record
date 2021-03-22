@@ -1,5 +1,7 @@
 package org.iesfm.record;
 
+import org.iesfm.record.excections.MemberNotFoundException;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -17,9 +19,9 @@ public interface IStore {
 
     TreeSet<Record> getAuthorRecords(String author);
 
-    List<Order> nifOrders(String nif);
+    List<Order> nifOrders(String nif) throws MemberNotFoundException;
 
-    int nifSpending(String nif);
+    int nifSpending(String nif) throws MemberNotFoundException;
 
     HashMap<String, Record> removeRecord(String title);
 

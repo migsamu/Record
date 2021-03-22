@@ -3,7 +3,7 @@ package org.iesfm.record;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class Record {
+public class Record implements  Comparable<Record>{
 
     private String title;
     private String author;
@@ -18,6 +18,11 @@ public class Record {
 
     public boolean hasGenre(String genre) {
         return genres.contains(genre);
+    }
+
+    @Override
+    public int compareTo(Record record) {
+        return this.title.compareTo(record.title);
     }
 
     public String getTitle() {

@@ -1,5 +1,7 @@
 package org.iesfm.record;
 
+import org.iesfm.record.excections.MemberNotFoundException;
+
 import java.util.*;
 
 
@@ -60,18 +62,18 @@ public class Store implements IStore {
     }
 
     @Override
-    public List<Order> nifOrders(String nif) {
-        List<Order> memberOrders = new LinkedList<>();
-        for (Member member : members.values()) {
-            if (member.getNif().equalsIgnoreCase(nif)) {
-                memberOrders = member.getOrders();
-            }
+    public List<Order> nifOrders(String nif) throws MemberNotFoundException {
+        Member member = members.get(nif);
+
+        if (member == null){
+            throw new MemberNotFoundException();
         }
-        return memberOrders;
+        return member.getOrders();
+
     }
 
     @Override
-    public int nifSpending(String nif) {
+    public int nifSpending(String nif) throws MemberNotFoundException {
         List<Order> memberOrders = nifOrders(nif);
         int spending = 0;
         for (Order order : memberOrders) {
